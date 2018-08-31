@@ -65,3 +65,26 @@ def test():
 	list_all_items()
 
 test()
+
+# Time for Mark_Completed
+
+def select(function_code):
+	# Create item
+	if function_code == "C":
+		input_item = user_input("Input item:")
+		create(input_item)
+
+	# Read item
+	elif function_code == "R":
+		item_index = user_input("Index Number?")
+
+		# Remember that item_index must actually exist or our program will crash.
+		read(item_index)
+
+	# Print all items
+	elif function_code == "P":
+		list_all_items()
+
+	# Catch all
+	else:
+		print("Unknown Option")
