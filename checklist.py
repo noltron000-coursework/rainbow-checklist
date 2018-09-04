@@ -66,19 +66,30 @@ def mark_completed(completed_item):
 	print("marking item as complete...")
 	# Add code here that marks an item as completed
 	checklist[completed_item] = "√"+str(checklist[completed_item])
+	print()
 
 # The select functoin can create, read one item, or read all items.
 def select(function_code):
 	# Create item
 	if function_code == "C":
-		input_item = user_input("Create New Item: ")
+		input_item = user_input("New Item Value: ")
 		create(input_item)
 
 	# Read item
 	elif function_code == "R":
-		item_index = user_input("Read Index Number: ")
+		item_index = user_input("Index to Read: ")
 		# Remember that item_index must actually exist or our program will crash.
 		read(int(item_index))
+
+	elif function_code == "U":
+		item_index = int(user_input("Index to Update: "))
+		input_item = user_input("Update Item Value: ")
+		update(item_index, input_item)
+
+
+	elif function_code == "D":
+		item_index = int(user_input("Index to Delete: "))
+		destroy(item_index)
 
 	# Print all items
 	elif function_code == "P":
@@ -86,17 +97,21 @@ def select(function_code):
 
 	# Mark as complete
 	elif function_code == "M":
-		completed_item = int(user_input("Mark Index Number: "))
+		completed_item = int(user_input("Index to Mark: "))
 		mark_completed(completed_item)
 
+	# Print Tutorial
+	elif function_code == "T":
+		tutorial()
+
 	# QUIT
-	elif function_code == "M":
+	elif function_code == "Q":
+		print("===QUITTING PROGRAM===")
 		return False
 
 	# Catch all
 	else:
-		print("Unknown Option")
-
+		print("Unknown Option. Please try again.")
 	return True
 
 
@@ -105,6 +120,19 @@ def user_input(prompt):
 	# and wait for user input.
 	user_input = input(prompt)
 	return user_input
+
+def tutorial():
+	print('''===Listing Tutorial...===
+C: Create
+R: Read (single)
+P: Print (all)
+U: Update
+M: Mark Item
+D: Destroy
+T: Tutorial
+Q: Quit
+===Tutorial Completed===
+''')
 
 def test_1():
 	print("===Test 1 Starting===")
@@ -139,11 +167,9 @@ def test_2():
 	# Call function with new value
 	select("R")
 	# View single result
-	select("P")
-	# View all results
 	select("M")
 	# Mark items as completed
-	list_all_items()
+	select("P")
 	# View all results
 	# Continue until all code is run
 	print("===Test 2 Complete===")
@@ -152,6 +178,5 @@ test_2()
 
 running = True
 while running:
-	selection = user_input(
-		"Press C to add to list, R to Read from list and P to display list")
-	select(selection)
+	selection = user_input("Input Command. (Type 'T' for Tutorial): ")
+	running = select(selection)
