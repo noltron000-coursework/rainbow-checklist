@@ -33,61 +33,72 @@ print(checklist)
 print()
 
 def create(item):
+	print("appending item...")
 	checklist.append(item)
+	print()
 
 def read(index):
+	print("reading item...")
+	print(checklist[index])
+	print()
 	return checklist[index]
 
 def update(index, item):
+	print("updating item...")
 	checklist[index] = item
+	print()
 
 def destroy(index):
+	print("destroying item...")
 	checklist.pop(index)
+	print()
 
 def list_all_items():
+	print("printing all items...")
 	index = 0
 	for list_item in checklist:
 		print(str(index) + ': ' + list_item)
 		index += 1
+	print()
 
-def test():
-	create("purple sox")
-	create("red cloak")
+# I created the "mark completed" function here.
+def mark_completed(completed_item):
+	print("marking item as complete...")
+	# Add code here that marks an item as completed
+	checklist[completed_item] = "√"+str(checklist[completed_item])
 
-	print(read(0))
-	print(read(1))
-
-	update(0, "purple socks")
-	destroy(1)
-
-	print(read(0))
-
-	list_all_items()
-
-test()
-
-# Time for Mark_Completed
-
+# The select functoin can create, read one item, or read all items.
 def select(function_code):
 	# Create item
 	if function_code == "C":
-		input_item = user_input("Input item:")
+		input_item = user_input("Create New Item: ")
 		create(input_item)
 
 	# Read item
 	elif function_code == "R":
-		item_index = user_input("Index Number?")
-
+		item_index = user_input("Read Index Number: ")
 		# Remember that item_index must actually exist or our program will crash.
-		read(item_index)
+		read(int(item_index))
 
 	# Print all items
 	elif function_code == "P":
 		list_all_items()
 
+	# Mark as complete
+	elif function_code == "M":
+		completed_item = int(user_input("Mark Index Number: "))
+		mark_completed(completed_item)
+
+	# QUIT
+	elif function_code == "M":
+		return False
+
 	# Catch all
 	else:
 		print("Unknown Option")
+
+	return True
+
 
 def user_input(prompt):
 	# the input function will display a message in the terminal
@@ -95,21 +106,52 @@ def user_input(prompt):
 	user_input = input(prompt)
 	return user_input
 
-def test():
+def test_1():
+	print("===Test 1 Starting===")
+	print()
+	create("purple sox")
+	create("red cloak")
+
+	read(0)
+	read(1)
+
+	list_all_items()
+	update(0, "purple socks")
+	destroy(1)
+
+	read(0)
+
+	list_all_items()
+	print("===Test 2 Complete===")
+	print()
+
+
+def test_2():
 	# Your testing code here
-	# ...
+	test_1()
 	# Call your new function with the appropriate value
+	print("===Test 2 Starting===")
+	print()
+	# Create a new value
 	select("C")
-	# View the results
+	# View all results
 	list_all_items()
 	# Call function with new value
 	select("R")
-	# View results
+	# View single result
+	select("P")
+	# View all results
+	select("M")
+	# Mark items as completed
 	list_all_items()
+	# View all results
 	# Continue until all code is run
+	print("===Test 2 Complete===")
 
-user_value = user_input("Please Enter a value:")
-print(user_value)
+test_2()
 
-
-select("R")
+running = True
+while running:
+	selection = user_input(
+		"Press C to add to list, R to Read from list and P to display list")
+	select(selection)
