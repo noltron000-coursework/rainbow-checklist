@@ -88,3 +88,28 @@ def select(function_code):
 	# Catch all
 	else:
 		print("Unknown Option")
+
+def user_input(prompt):
+	# the input function will display a message in the terminal
+	# and wait for user input.
+	user_input = input(prompt)
+	return user_input
+
+def test():
+	# Your testing code here
+	# ...
+	# Call your new function with the appropriate value
+	select("C")
+	# View the results
+	list_all_items()
+	# Call function with new value
+	select("R")
+	# View results
+	list_all_items()
+	# Continue until all code is run
+
+user_value = user_input("Please Enter a value:")
+print(user_value)
+
+
+select("R")
