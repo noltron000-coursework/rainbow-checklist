@@ -1,8 +1,9 @@
 # Rainbow Checklist 🌈
-***Introductory assignment from Computer Science 1-1***
+***Introductory Python 3 assignment***
 > This project was created at [Make School](https://github.com/MakeSchool), a modern and innovative college for future software engineers.  
 > To learn more, visit their [website](http://make.sc).
 
+This project was Make School's introduction to Python and programming in general, covered in their Computer Science course.
 Assignment Link: https://www.makeschool.com/academy/track/captain-rainbow-s-color-checklist
 
 ## Developer Setup
