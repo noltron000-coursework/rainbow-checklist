@@ -1,71 +1,47 @@
-# Lets make some noise :D
-# We'll start with printing and functions.
-print()
-
-print("<=== Hello World ===>")
-print("Welcome to THE CHECKLIST")
-
-def my_fun_function(say_this):
-	print(say_this)
-
-my_fun_function('Hello World')
-
-# Lets run through making a list.
-print()
-
-print("we are going to make some modifications to a list...")
+# Create a list of items
 checklist = []
-print(checklist)
-checklist.append('Blue')
-print(checklist)
-checklist.append('Orange')
-print(checklist)
-checklist = ['Hello', 'World']
-print(checklist)
-checklist[1] = 'Cats'
-print(checklist)
-checklist = ['Hello', 'World']
-print(checklist)
-checklist.pop(1)
-print(checklist)
 
-# Now, lets sum it up within FUNCTIONS.
-print()
+# This is CRUD:
+# - Create
+# - Read
+# - Update
+# - Delete
 
+# Define CRUD for our checklist
 def create(item):
+	'''adds an item to the list'''
 	print("appending item...")
-	checklist.append(item)
-	print()
+	checklist.append(str(item))
 
 def read(index):
+	'''prints an item on the list'''
 	print("reading item...")
-	print(checklist[index])
-	print()
-	return checklist[index]
+	print(str(index) + ': ' + checklist[index]))
 
 def update(index, item):
+	'''changes an item on the list'''
 	print("updating item...")
-	checklist[index] = item
-	print()
+	checklist[index] = str(item)
 
 def destroy(index):
+	'''removes an item from the list'''
 	print("destroying item...")
 	checklist.pop(index)
-	print()
 
 def list_all_items():
+	'''prints all items on the list'''
 	print("printing all items...")
 	index = 0
 	for list_item in checklist:
 		print(str(index) + ': ' + list_item)
 		index += 1
-	print()
 
 # I created the "mark completed" function here.
 def mark_completed(completed_item):
-	print("marking item as complete...")
+	'''adds a nice checkmark to the list'''
+	print("marking item as complete...\n")
 	# Add code here that marks an item as completed
-	checklist[completed_item] = "√"+str(checklist[completed_item])
+	checklist[completed_item] = "[x] "+str(checklist[completed_item])
 	print()
 
 # The select functoin can create, read one item, or read all items.
