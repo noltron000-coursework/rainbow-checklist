@@ -5,7 +5,7 @@ An empty checkbox is added to every new item.
 You can check or uncheck the item's checkbox.
 '''
 # here's the checklist
-checklist = []
+checklist = [] # Make the checklist a class
 
 # This is CRUD:
 # - Create
@@ -63,25 +63,28 @@ def mark_completed(index):
 
 # The select functoin can create, read one item, or read all items.
 def select(function_code):
+	'''Tests for lowercase letters as well, 
+		Swap the word index for number, so parents can understand
+	'''
 	# Create item
 	if function_code == 'C':
-		input_item = user_input('New Item Value: ')
+		input_item = input_str('New Item Value: ')
 		create(input_item)
 
 	# Read item
 	elif function_code == 'R':
-		item_index = user_input('Index to Read: ')
+		item_index = input_idx('Index to Read: ')
 		# Remember that item_index must actually exist or our program will crash.
 		read(int(item_index))
 
 	elif function_code == 'U':
-		item_index = int(user_input('Index to Update: '))
-		input_item = user_input('Update Item Value: ')
+		item_index = int(input_idx('Index to Update: '))
+		input_item = input_str('Update Item Value: ')
 		update(item_index, input_item)
 
 
 	elif function_code == 'D':
-		item_index = int(user_input('Index to Delete: '))
+		item_index = int(input_idx('Index to Delete: '))
 		destroy(item_index)
 
 	# Print all items
@@ -90,7 +93,7 @@ def select(function_code):
 
 	# Mark as complete
 	elif function_code == 'M':
-		completed_item = int(user_input('Index to Mark: '))
+		completed_item = int(input_idx('Index to Mark: '))
 		mark_completed(completed_item)
 
 	# Print Tutorial
@@ -112,30 +115,41 @@ def select(function_code):
 		print('Unknown Option. Please try again.')
 	return True
 
-def user_input(prompt):
-	# the input function will display a message in the terminal
-	# and wait for user input.
-	user_input = input(prompt)
-	return user_input
+def input_str(prompt):
+	# display a message in the terminal & await an input.
+	output_str = str(input(prompt))
+	return output_str
+	
+def input_idx(prompt):
+	# Improve function names
+	# display a message in the terminal & await an input.
+	output_idx = int(input(prompt))
+	if 0 <= output_idx < len(checklist):
+		return output_idx
+	else:
+		print('Unknown Option. Please try again.')
+
 
 def tutorial():
+	# TODO: Keep semantics consistent, Explain UI of box
 	print('''
-┌────────────────────┐ 
-│ ** INSTRUCTIONS ** │
-╞════════════════════╡
-│ C: create          │
-│ R: read one item   │
-│ P: print all items │
-│ U: update          │
-│ M: (un)mark item   │
-│ D: destroy         │
-│ ?: tutorial        │
-│ T: run test suite  │
-│ Q: quit            │
-└────────────────────┘
+┌────────────────────────────┐ 
+│     ** INSTRUCTIONS **     │
+╞════════════════════════════╡
+│ C: create                  │
+│ R: read one item           │
+│ P: print all items         │
+│ U: update                  │
+│ M: (un)mark item           │
+│ D: destroy                 │
+│ ?: tutorial                │
+│ T: run test suite          │
+│ Q: quit                    │
+└────────────────────────────┘
 ''')
 
 def test_1():
+	#TODO: Add asserts
 	create('purple sox')
 	create('red cloak')
 	read(0)
@@ -166,7 +180,20 @@ def test_2():
 	# Continue to main program
 	print('all tests successfully completed,\nplease continue to main program.\n')
 
-running = True
-while running:
-	selection = user_input('Input Command. (type "?" for instructions): ')
-	running = select(selection)
+def main():
+	running = True
+	print('''
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ WELCOME TO CHECKLIST BUDDY ┃
+┃                            ┃
+┃ to access the instructions ┃
+┃ enter `?` when prompted to ┃
+┃   do so by the terminal.   ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+''')
+	while running:
+		selection = input_str('Input Command: ')
+		running = select(selection)
+
+if __name__ == '__main__':
+	main()
