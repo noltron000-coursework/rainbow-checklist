@@ -136,29 +136,19 @@ def tutorial():
 ''')
 
 def test_1():
-	print('===Test 1 Starting===')
-	print()
 	create('purple sox')
 	create('red cloak')
-
 	read(0)
 	read(1)
-
 	list_all_items()
+
 	update(0, 'purple socks')
 	destroy(1)
-
 	read(0)
-
+	destroy(0)
 	list_all_items()
-	print('===Test 2 Complete===')
-	print()
-
 
 def test_2():
-	# Call your new function with the appropriate value
-	print('===Test 2 Starting===')
-	print()
 	# Create a new value
 	select('C')
 	# View all results
@@ -169,11 +159,12 @@ def test_2():
 	select('M')
 	# Mark items as completed
 	select('P')
+	# Delete it!
+	select('D')
 	# View all results
-	# Continue until all code is run
-	print('===Test 2 Complete===')
+	list_all_items()
 	# Continue to main program
-	print('please continue to main program.\n')
+	print('all tests successfully completed,\nplease continue to main program.\n')
 
 running = True
 while running:
