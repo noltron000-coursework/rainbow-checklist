@@ -2,8 +2,8 @@
 # We'll start with printing and functions.
 print()
 
-print("<=== Hello World ===>")
-print("Welcome to THE CHECKLIST")
+print('<=== Hello World ===>')
+print('Welcome to THE CHECKLIST')
 
 def my_fun_function(say_this):
 	'''prints say_this to console'''
@@ -12,12 +12,12 @@ def my_fun_function(say_this):
 my_fun_function('Hello World')
 
 # lets go through the motions of what an array can do
-print("we are going to make some modifications to a list...")
-checklist = [] # Create a "LIST" item
+print('we are going to make some modifications to a list...')
+checklist = [] # Create a 'LIST' item
 print(checklist)
-checklist.append('Blue') # Add "BLUE" to  list
+checklist.append('Blue') # Add 'BLUE' to  list
 print(checklist)
-checklist.append('Orange') # Add "ORANGE" to list
+checklist.append('Orange') # Add 'ORANGE' to list
 print(checklist)
 checklist = ['Hello', 'World'] # Completely change list
 print(checklist)
