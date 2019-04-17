@@ -1,8 +1,7 @@
 # Rainbow Checklist 🌈
+***Introductory assignment from Computer Science 1-1***
 > This project was created at [Make School](https://github.com/MakeSchool), a modern and innovative college for future software engineers.  
 > To learn more, visit their [website](http://make.sc).
-
-***Introductory assignment from Computer Science 1-1***
 
 Assignment Link: https://www.makeschool.com/academy/track/captain-rainbow-s-color-checklist
 
