@@ -1,4 +1,10 @@
-# Create a list of items
+'''
+This file makes a terminal checklist.
+You can add, remove, update, and read from this checklist.
+An empty checkbox is added to every new item.
+You can check or uncheck the item's checkbox.
+'''
+# here's the checklist
 checklist = []
 
 # This is CRUD:
@@ -10,39 +16,50 @@ checklist = []
 # Define CRUD for our checklist
 def create(item):
 	'''adds an item to the list'''
-	print('appending item...')
-	checklist.append(str(item))
+	print('appending item...\n')
+	checklist.append('[ ] ' + str(item))
 
 def read(index):
 	'''prints an item on the list'''
-	print('reading item...')
-	print(str(index) + ': ' + checklist[index])
+	print('reading item...\n')
+	print('{' + str(index) + '}: ' + checklist[index])
 
 def update(index, item):
 	'''changes an item on the list'''
-	print('updating item...')
-	checklist[index] = str(item)
+	print('updating item...\n')
+	checklist[index] = '[ ] ' + str(item)
 
 def destroy(index):
 	'''removes an item from the list'''
-	print('destroying item...')
+	print('destroying item...\n')
 	checklist.pop(index)
 
 def list_all_items():
 	'''prints all items on the list'''
-	print('printing all items...')
+	print('printing all items...\n')
 	index = 0
 	for list_item in checklist:
-		print(str(index) + ': ' + list_item)
+		print('{' + str(index) + '}: ' + list_item)
 		index += 1
 
 # I created the 'mark completed' function here.
-def mark_completed(completed_item):
-	'''adds a nice checkmark to the list'''
-	print('marking item as complete...\n')
-	# Add code here that marks an item as completed
-	checklist[completed_item] = '[x] '+str(checklist[completed_item])
-	print()
+def mark_completed(index):
+	'''adds a nice checkmark to indexed item'''
+	print('toggling check on index...\n')
+	# get string from checklist
+	string = checklist[index]
+	# mark unchecked string
+	print(string[:4])
+	if string[:4] == '[ ] ':
+		string = string[:1] + 'x' + string[2:]
+	# unmark checked string
+	elif string[:4] == '[x] ':
+		string = string[:1] + ' ' + string[2:]
+	# there's no checkbox!
+	else:
+		raise ValueError('this string does not have a checkbox!')
+	# update checklist with string
+	checklist[index] = string
 
 # The select functoin can create, read one item, or read all items.
 def select(function_code):
@@ -77,8 +94,13 @@ def select(function_code):
 		mark_completed(completed_item)
 
 	# Print Tutorial
-	elif function_code == 'T':
+	elif function_code == '?':
 		tutorial()
+
+	# Run Test Suite
+	elif function_code == 'T':
+		test_1()
+		test_2()
 
 	# QUIT
 	elif function_code == 'Q':
@@ -90,7 +112,6 @@ def select(function_code):
 		print('Unknown Option. Please try again.')
 	return True
 
-
 def user_input(prompt):
 	# the input function will display a message in the terminal
 	# and wait for user input.
@@ -98,16 +119,20 @@ def user_input(prompt):
 	return user_input
 
 def tutorial():
-	print('''===Listing Tutorial...===
-C: Create
-R: Read (single)
-P: Print (all)
-U: Update
-M: Mark Item
-D: Destroy
-T: Tutorial
-Q: Quit
-===Tutorial Completed===
+	print('''
+┌────────────────────┐ 
+│ ** INSTRUCTIONS ** │
+╞════════════════════╡
+│ C: create          │
+│ R: read one item   │
+│ P: print all items │
+│ U: update          │
+│ M: (un)mark item   │
+│ D: destroy         │
+│ ?: tutorial        │
+│ T: run test suite  │
+│ Q: quit            │
+└────────────────────┘
 ''')
 
 def test_1():
@@ -131,8 +156,6 @@ def test_1():
 
 
 def test_2():
-	# Your testing code here
-	test_1()
 	# Call your new function with the appropriate value
 	print('===Test 2 Starting===')
 	print()
@@ -152,9 +175,7 @@ def test_2():
 	# Continue to main program
 	print('please continue to main program.\n')
 
-test_2()
-
 running = True
 while running:
-	selection = user_input('Input Command. (Type 'T' for Tutorial): ')
+	selection = user_input('Input Command. (type "?" for instructions): ')
 	running = select(selection)
