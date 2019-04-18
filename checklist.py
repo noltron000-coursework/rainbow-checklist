@@ -208,7 +208,7 @@ def input_idx(prompt):
 	# Improve function names
 	# display a message in the terminal & await an input.
 	output_idx = input(prompt)
-	if output_idx ==  '':
+	if not output_idx.isdigit():
 		print('INVALID! Please input a value below ' + str(len(checklist)) + '.\n')
 		return input_idx(prompt)
 
