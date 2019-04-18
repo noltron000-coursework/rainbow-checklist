@@ -1,4 +1,3 @@
-# Lets make some noise :D
 # We'll start with printing and functions.
 print()
 
