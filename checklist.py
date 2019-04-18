@@ -1,8 +1,8 @@
 '''
 This file makes a terminal checklist.
-You can add, remove, update, and read items from the list.
+You can add, remove, update, and read entries from the list.
 An empty checkbox is prepended to every new entry.
-You can then check or uncheck the item's checkbox.
+You can then check or uncheck the entry's checkbox.
 '''
 # here's the checklist
 checklist = [] # Make the checklist a class
@@ -14,15 +14,15 @@ checklist = [] # Make the checklist a class
 # - Delete
 
 # Define CRUD for our checklist
-def create(item):
+def create(entry):
 	'''
-	adds one new item to the end of the list
+	adds one new entry to the end of the list
 	'''
-	checklist.append('[ ] ' + str(item))
+	checklist.append('[ ] ' + str(entry))
 
 def read(index):
 	'''
-	prints one item to the terminal from its index
+	prints one entry to the terminal from its index
 	'''
 	# set entry
 	entry = checklist[index]
@@ -51,24 +51,24 @@ def read(index):
 	print('└──┴─────────────────────────┘\n')
 
 
-def update(index, item):
+def update(index, entry):
 	'''
-	changes the contents of one item on the list
-	note that this keeps the item checked or unchecked
+	changes the contents of one entry on the list
+	note that this keeps the entry checked or unchecked
 	'''
-	checklist[index] = checklist[index][:4] + str(item)
+	checklist[index] = checklist[index][:4] + str(entry)
 
 
 def destroy(index):
 	'''
-	removes one item from the list
+	removes one entry from the list
 	'''
 	checklist.pop(index)
 
 
-def list_all_items():
+def list_all_entries():
 	'''
-	prints all items on the list
+	prints all entries on the list
 	'''
 	index = 0
 	chart = ''
@@ -104,12 +104,12 @@ def list_all_items():
 
 def mark_completed(index):
 	'''
-	check an item if it is unchecked
-	uncheck an item if it is checked
+	check an entry if it is unchecked
+	uncheck an entry if it is checked
 	---
 	notice that the first four characters of an entry is:
 	"[ ] " -OR- "[x] "
-	this is useful to tell which items have are checked.
+	this is useful to tell which entries have are checked.
 	'''
 	# get string from checklist
 	string = checklist[index]
@@ -135,50 +135,50 @@ def select(function_code):
 	Tests for lowercase letters as well, 
 	Swap the word index for number, so parents can understand
 	'''
-	# Create item
+	# Create entry
 	if function_code == 'C':
-		input_item = input('Enter text for new entry: ')
-		create(input_item)
+		input_entry = input('Enter text for new entry: ')
+		create(input_entry)
 
-	# Print all items
+	# Print all entries
 	elif function_code == 'P':
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			list_all_items()
+			list_all_entries()
 
-	# Read item
+	# Read entry
 	elif function_code == 'R':
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			item_index = int(input_idx('Enter index of entry to read: '))
-			read(int(item_index))
+			entry_index = int(input_idx('Enter index of entry to read: '))
+			read(int(entry_index))
 
-	# Update item
+	# Update entry
 	elif function_code == 'U':
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			item_index = int(input_idx('Enter index of entry to update: '))
-			input_item = input('Enter new text for updated entry: ')
-			update(item_index, input_item)
+			entry_index = int(input_idx('Enter index of entry to update: '))
+			input_entry = input('Enter new text for updated entry: ')
+			update(entry_index, input_entry)
 
-	# Delete item
+	# Delete entry
 	elif function_code == 'D':
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			item_index = int(input_idx('Enter index of entry to delete: '))
-			destroy(item_index)
+			entry_index = int(input_idx('Enter index of entry to delete: '))
+			destroy(entry_index)
 
 	# Mark as complete
 	elif function_code == 'M':
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			completed_item = int(input_idx('Enter index of entry to mark: '))
-			mark_completed(completed_item)
+			completed_entry = int(input_idx('Enter index of entry to mark: '))
+			mark_completed(completed_entry)
 
 	# Print Tutorial
 	elif function_code == '?':
@@ -191,7 +191,11 @@ def select(function_code):
 
 	# QUIT
 	elif function_code == 'Q':
-		print('===QUITTING PROGRAM===')
+		print('''
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃          Goodbye!          ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+''')
 		return False
 
 	# Catch all
@@ -242,29 +246,29 @@ def test_1():
 	create('red cloak')
 	read(0)
 	read(1)
-	list_all_items()
+	list_all_entries()
 
 	update(0, 'purple socks')
 	destroy(1)
 	read(0)
 	destroy(0)
-	list_all_items()
+	list_all_entries()
 
 def test_2():
 	# Create a new value
 	select('C')
 	# View all results
-	list_all_items()
+	list_all_entries()
 	# Call function with new value
 	select('R')
 	# View single result
 	select('M')
-	# Mark items as completed
+	# Mark entries as completed
 	select('P')
 	# Delete it!
 	select('D')
 	# View all results
-	list_all_items()
+	list_all_entries()
 	# Continue to main program
 	print('all tests successfully completed,\nplease continue to main program.\n')
 
