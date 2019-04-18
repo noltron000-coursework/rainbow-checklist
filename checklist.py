@@ -135,6 +135,9 @@ def select(function_code):
 	Tests for lowercase letters as well, 
 	Swap the word index for number, so parents can understand
 	'''
+	# Capitalize code before checking it
+	function_code = function_code.upper()
+	
 	# Create entry
 	if function_code == 'C':
 		input_entry = input('Enter text for new entry: ')
