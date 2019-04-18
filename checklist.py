@@ -189,8 +189,7 @@ def select(function_code):
 
 	# Run Test Suite
 	elif function_code == 'T':
-		test_1()
-		test_2()
+		test()
 
 	# QUIT
 	elif function_code == 'Q':
@@ -243,37 +242,72 @@ def tutorial():
 └────────────────────────────┘
 ''')
 
-def test_1():
-	#TODO: Add asserts
+def test():
+	# store current checklist for later
+	while not len(checklist) == 0:
+		destroy(0)
+	# test that several methods won't work
+	# because they shouldn't with an empty checklist
+	select('R') # read
+	assert checklist == []
+	select('P') # print
+	assert checklist == []
+	select('U') # update
+	assert checklist == []
+	select('M') # mark
+	assert checklist == []
+	select('D') # delete
+	assert checklist == []
+
+	# test create method
 	create('purple sox')
 	create('red cloak')
+	create('a particularly lengthy string')
+	assert checklist[0] == '[ ] purple sox'
+	assert checklist[1] == '[ ] red cloak'
+	assert checklist[2] == '[ ] a particularly lengthy string'
+	assert len(checklist) == 3
+	
+	# test read method
 	read(0)
 	read(1)
-	list_all_entries()
+	read(2)
+	assert len(checklist) == 3
 
-	update(0, 'purple socks')
+	# test print method
+	select('P')
+	assert len(checklist) == 3
+
+	# test update method
+	update(2, 'short string')
+	select('P')
+	assert len(checklist) == 3
+
+	mark_completed(2)
+	select('P')
+	mark_completed(2)
+	select('P')
+
+	while len(checklist) < 200:
+		create('spam')
+
+	select('P')
+
 	destroy(1)
 	read(0)
 	destroy(0)
-	list_all_entries()
+	read(0)
+	destroy(0)
 
-def test_2():
-	# Create a new value
-	select('C')
-	# View all results
-	list_all_entries()
-	# Call function with new value
-	select('R')
-	# View single result
-	select('M')
-	# Mark entries as completed
-	select('P')
-	# Delete it!
-	select('D')
-	# View all results
-	list_all_entries()
-	# Continue to main program
-	print('all tests successfully completed,\nplease continue to main program.\n')
+	while not len(checklist) == 0:
+		destroy(0)
+
+	assert len(checklist) == 0
+	print('''
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃    ALL TESTS SUCCESSFUL    ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+''')
 
 def main():
 	running = True
