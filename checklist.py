@@ -24,7 +24,31 @@ def read(index):
 	'''
 	prints one item to the terminal from its index
 	'''
-	print('{' + str(index) + '}: ' + checklist[index])
+	# set entry
+	entry = checklist[index]
+
+	# print starter box
+	print('\n┌──┬─────────────────────────┐')
+
+	if index < 10:
+		index_str = ' ' + str(index)
+
+	# do nothing to orient string
+	else:
+		index_str = str(index)
+
+	# check length of entry to see if box fits
+	if len(entry) <= 24:
+		entry_str = entry + ' '*(24-len(entry)) + '│'
+
+	# if it doesnt, break the boundries and keep going
+	else:
+		entry_str = entry
+
+	print('│'+ index_str + '│ ' + entry_str)
+
+	# print exiter box
+	print('└──┴─────────────────────────┘\n')
 
 
 def update(index, item):
@@ -77,7 +101,7 @@ def list_all_items():
 	# print exiter box
 	print('└──┴─────────────────────────┘\n')
 
-# I created the 'mark completed' function here.
+
 def mark_completed(index):
 	'''
 	check an item if it is unchecked
@@ -106,7 +130,6 @@ def mark_completed(index):
 	checklist[index] = string
 
 
-# The select functoin can create, read one item, or read all items.
 def select(function_code):
 	'''
 	Tests for lowercase letters as well, 
@@ -117,30 +140,45 @@ def select(function_code):
 		input_item = input('New Item Value: ')
 		create(input_item)
 
-	# Read item
-	elif function_code == 'R':
-		item_index = input_idx('Index to Read: ')
-		# Remember that item_index must actually exist or our program will crash.
-		read(int(item_index))
-
-	elif function_code == 'U':
-		item_index = int(input_idx('Index to Update: '))
-		input_item = input('Update Item Value: ')
-		update(item_index, input_item)
-
-
-	elif function_code == 'D':
-		item_index = int(input_idx('Index to Delete: '))
-		destroy(item_index)
-
 	# Print all items
 	elif function_code == 'P':
-		list_all_items()
+		if len(checklist) == 0:
+			print('your checklist is empty!')
+		else:
+			list_all_items()
+
+	# Read item
+	elif function_code == 'R':
+		if len(checklist) == 0:
+			print('your checklist is empty!')
+		else:
+			item_index = input_idx('Index to Read: ')
+			read(int(item_index))
+
+	# Update item
+	elif function_code == 'U':
+		if len(checklist) == 0:
+			print('your checklist is empty!')
+		else:
+			item_index = int(input_idx('Index to Update: '))
+			input_item = input('Update Item Value: ')
+			update(item_index, input_item)
+
+	# Delete item
+	elif function_code == 'D':
+		if len(checklist) == 0:
+			print('your checklist is empty!')
+		else:
+			item_index = int(input_idx('Index to Delete: '))
+			destroy(item_index)
 
 	# Mark as complete
 	elif function_code == 'M':
-		completed_item = int(input_idx('Index to Mark: '))
-		mark_completed(completed_item)
+		if len(checklist) == 0:
+			print('your checklist is empty!')
+		else:
+			completed_item = int(input_idx('Index to Mark: '))
+			mark_completed(completed_item)
 
 	# Print Tutorial
 	elif function_code == '?':
@@ -169,7 +207,8 @@ def input_idx(prompt):
 	if 0 <= output_idx < len(checklist):
 		return output_idx
 	else:
-		print('Unknown Option. Please try again.')
+		print('INVALID! Your index must be below ' + str(len(checklist)) + '\n')
+		return input_idx(prompt)
 
 
 def tutorial():
