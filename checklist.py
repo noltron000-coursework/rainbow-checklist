@@ -161,7 +161,7 @@ def select(function_code):
 			print('your checklist is empty!')
 		else:
 			item_index = int(input_idx('Enter index of entry to update: '))
-			input_item = input('Enter text for updated entry: ')
+			input_item = input('Enter new text for updated entry: ')
 			update(item_index, input_item)
 
 	# Delete item
@@ -203,12 +203,19 @@ def select(function_code):
 def input_idx(prompt):
 	# Improve function names
 	# display a message in the terminal & await an input.
-	output_idx = int(input(prompt))
-	if 0 <= output_idx < len(checklist):
-		return output_idx
-	else:
-		print('INVALID! Your index must be below ' + str(len(checklist)) + '.\n')
+	output_idx = input(prompt)
+	if output_idx ==  '':
+		print('INVALID! Please input a value below ' + str(len(checklist)) + '.\n')
 		return input_idx(prompt)
+
+	else:
+		output_idx = int(output_idx)
+		if 0 <= output_idx < len(checklist):
+			return output_idx
+
+		else:
+			print('INVALID! Your index must be below ' + str(len(checklist)) + '.\n')
+			return input_idx(prompt)
 
 
 def tutorial():
