@@ -137,7 +137,7 @@ def select(function_code):
 	'''
 	# Create item
 	if function_code == 'C':
-		input_item = input('New Item Value: ')
+		input_item = input('Enter text for new entry: ')
 		create(input_item)
 
 	# Print all items
@@ -152,7 +152,7 @@ def select(function_code):
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			item_index = input_idx('Index to Read: ')
+			item_index = int(input_idx('Enter index of entry to read: '))
 			read(int(item_index))
 
 	# Update item
@@ -160,8 +160,8 @@ def select(function_code):
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			item_index = int(input_idx('Index to Update: '))
-			input_item = input('Update Item Value: ')
+			item_index = int(input_idx('Enter index of entry to update: '))
+			input_item = input('Enter text for updated entry: ')
 			update(item_index, input_item)
 
 	# Delete item
@@ -169,7 +169,7 @@ def select(function_code):
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			item_index = int(input_idx('Index to Delete: '))
+			item_index = int(input_idx('Enter index of entry to delete: '))
 			destroy(item_index)
 
 	# Mark as complete
@@ -177,7 +177,7 @@ def select(function_code):
 		if len(checklist) == 0:
 			print('your checklist is empty!')
 		else:
-			completed_item = int(input_idx('Index to Mark: '))
+			completed_item = int(input_idx('Enter index of entry to mark: '))
 			mark_completed(completed_item)
 
 	# Print Tutorial
@@ -207,7 +207,7 @@ def input_idx(prompt):
 	if 0 <= output_idx < len(checklist):
 		return output_idx
 	else:
-		print('INVALID! Your index must be below ' + str(len(checklist)) + '\n')
+		print('INVALID! Your index must be below ' + str(len(checklist)) + '.\n')
 		return input_idx(prompt)
 
 
